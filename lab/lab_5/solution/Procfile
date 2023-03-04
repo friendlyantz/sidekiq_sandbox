@@ -1,0 +1,7 @@
+enqueuer: bundle exec ruby enqueue.rb
+crit: bundle exec sidekiq -c 25 -q critical -q high -r ./app.rb
+medium: bundle exec sidekiq -c 10 -q medium -q bulk -r ./app.rb
+bulk: bundle exec sidekiq -c 5 -q bulk -q medium -r ./app.rb
+
+# foreman start -c enqueuer=1,crit=1,medium=1,bulk=2
+# Depending on your machine, you may need medium=2

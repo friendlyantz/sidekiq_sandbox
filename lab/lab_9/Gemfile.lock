@@ -1,0 +1,25 @@
+PATH
+  remote: ../../prof_gray_satellite_analysis
+  specs:
+    prof_gray_satellite_analysis (0.1.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    connection_pool (2.2.5)
+    rack (2.2.3)
+    redis (4.4.0)
+    sidekiq (6.2.2)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      redis (>= 4.2.0)
+
+PLATFORMS
+  x86_64-darwin-20
+
+DEPENDENCIES
+  prof_gray_satellite_analysis!
+  sidekiq
+
+BUNDLED WITH
+   2.2.3

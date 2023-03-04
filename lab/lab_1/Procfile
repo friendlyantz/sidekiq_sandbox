@@ -1,0 +1,2 @@
+enqueuer: bundle exec ruby enqueue.rb
+worker: bundle exec sidekiq -r ./app.rb
