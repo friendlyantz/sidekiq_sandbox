@@ -10,16 +10,22 @@ I need you to figure out the optimal `concurrency` setting for each type of job,
 
 Your deliverable will be to fill out this table with the concurrency setting which meets my latency requirements but minimizes the amount of time to process 1000 units of each job type:
 
-| Job Type | % time in C extension (estimated) | `concurrency` |
-|----------|-----------------------------------|---------------|
-| A        | 10%                               |               |
-| B        | 30%                               |               |
-| C        | 60%                               |               |
-| D        | 90%                               |               |
+| Job Type | % time in C extension (estimated)  | % time in C extension via OpenTel  | `concurrency` |
+|----------|----------------------------------- | ---------------------------------- |---------------|
+| A        | 10%                                |                                    |               |
+| B        | 30%                                |                                    |               |
+| C        | 60%                                |                                    |               |
+| D        | 90%                                |                                    |               |
 
 You're pretty smart, so you should be able to guess the answer before even testing it.
 
-Run the test program with `concurrency=1` by running `$ time bundle exec sidekiq -r ./concurrency_test.rb -c 1 <JOB TYPE>`, where `<JOB_TYPE>` is any one of A, B, C or D. I've designed this test to take, at most, about 60 seconds. It will fail automatically if you exceed my latency requirement (check the logs).
+Run the test program with `concurrency=1` by running
+
+```
+JOB_TYPE=A time bundle exec sidekiq -r ./concurrency_test.rb -c 1
+```
+
+, where `<JOB_TYPE>` is any one of A, B, C or D. I've designed this test to take, at most, about 60 seconds. It will fail automatically if you exceed my latency requirement (check the logs).
 
 You may want to try even higher concurrency settings, even if they increase latency beyond my requirements, simply for your own education. Note how latency increases at ever-higher concurrencies.
 
