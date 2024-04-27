@@ -2,13 +2,16 @@ require_relative "../../prof_gray/satellite_analysis"
 require "sidekiq/cli"
 require "sidekiq/api"
 
+
 Sidekiq.redis { |conn|
   conn.flushall
 }
 
+
+number_of_jobs = 60
 Sidekiq::Client.push_bulk(
   "class" => "DataProcessor",
-  "args" => ProfGraySatelliteAnalysis::Data.retrieve(30)
+  "args" => ProfGraySatelliteAnalysis::Data.retrieve(number_of_jobs)
 )
 
 STDOUT.flush
@@ -24,10 +27,10 @@ while Time.now <= end_time
     puts "Failure - at least one job failed."
     break
   end
-  break if stats.processed >= 30
+  break if stats.processed >= number_of_jobs
 end
 
-if stats.processed == 30
+if stats.processed == number_of_jobs
   puts "Success - all results processed"
 else
   raise "Failure - not all jobs processed. Was: #{stats.processed}"

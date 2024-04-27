@@ -7,6 +7,7 @@ class DataProcessor
   include Sidekiq::Worker
 
   def perform(data)
+    sleep 2
     ProfGraySatelliteAnalysis::Analyzer.analyze_type(data, {"type" => "a"})
   end
 end

@@ -29,3 +29,11 @@ Later labs will need a Postgres server running on `localhost:5432`. You may alte
 Many labs have time limits. I have done my best to calculate these time limits so that they will work for a majority of computers, but CPU speed may make some labs easier or other labs harder.
 
 It's possible that Foreman may not shut down all your Sidekiq servers correctly, or if you happen to be running a Sidekiq server from outside this course at the same time. You can see very strange errors when this happens. Be sure to `kill` all Sidekiq servers - I use `pkill -9 sidekiq`. [Using `foreman start -t 10` may mitigate this issue.](https://github.com/mperham/sidekiq/issues/2312)
+
+----
+
+added sidekiq WebUI
+
+```ruby
+bundle exec rackup sidekiq_web_config.ru -p 9393
+```
